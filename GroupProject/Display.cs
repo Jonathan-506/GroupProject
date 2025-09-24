@@ -9,13 +9,13 @@ namespace GroupProject
     internal class Display
     {
 
-        public static void ScreenDisplay()
+        public static void ScreenDisplay(List<Transaction> transactions)
         {
             Console.Clear();
 
             StartUp();
             
-            MenuDisplay();
+            MenuDisplay(transactions);
         }
 
         public static void StartUp()
@@ -23,13 +23,15 @@ namespace GroupProject
             Console.WriteLine("Welcome to basic finance App \n Press any Key to continue");
             Console.ReadKey(true);
         }
-        public static void MenuDisplay()
+        public static void MenuDisplay(List<Transaction> transactions)
         {
             Console.Clear();
 
             Console.WriteLine("Please choose what you want to view!");
             Console.WriteLine("To choose what you want to view type t for transactions, c for categories, b for your main budget");
+            string response = Console.ReadLine();
 
+            Menu(response, transactions);
 
         }
 
@@ -54,6 +56,14 @@ namespace GroupProject
                 MakeTransacitonDisplay(transactions);
             }
 
+            Console.WriteLine("Would you like to go back to the menu? Y/N");
+            response = Console.ReadLine();
+
+            if(response == "Y")
+            {
+                MenuDisplay(transactions);
+            }
+            
 
         }
 
@@ -94,36 +104,37 @@ namespace GroupProject
             }
         }
 
-        public static void BudgetDisplay()
+        public static void BudgetDisplay(List<Transaction> transactions)
         {
             Console.WriteLine("Nothing here! hit enter to return to menu");
             Console.ReadKey(true);
-            MenuDisplay();
+            MenuDisplay(transactions);
         }
         
-        public static void CategoriesDisplay()
+        public static void CategoriesDisplay(List<Transaction> transactions)
         {
             Console.WriteLine("Nothing here! hit enter to return to menu");
             Console.ReadKey(true);
-            MenuDisplay();
+            MenuDisplay(transactions);
         }
 
-        public static void Menu(char letter, List<Transaction> transactions)
+        public static void Menu(string response, List<Transaction> transactions)
         {
 
-            switch (letter)
+            switch (response)
             {
-                case 't':
+                case "t":
                     TransactionsDisplay(transactions);
                     break;
-                case 'b':
-                    BudgetDisplay();
+                case "b":
+                    BudgetDisplay(transactions);
                     break;
-                case 'c':
-                    CategoriesDisplay();
+                case "c":
+                    CategoriesDisplay(transactions);
                     break;
                 default:
                     Console.WriteLine("you shouldn't see this");
+                    MenuDisplay(transactions);
                     break;
 
 
