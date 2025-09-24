@@ -5,7 +5,8 @@ public class Program
 {
     public void Main()
     {
-        Display.ScreenDisplay();
+        List<Transaction> transactions = new List<Transaction>();
+        Display.ScreenDisplay(transactions);
     }
 }
 
