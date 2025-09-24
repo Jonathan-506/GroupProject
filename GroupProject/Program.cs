@@ -3,7 +3,7 @@ using GroupProject;
 
 public class Program
 {
-    public void Main()
+    public static void Main()
     {
         List<Transaction> transactions = new List<Transaction>();
         Display.ScreenDisplay(transactions);
