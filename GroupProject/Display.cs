@@ -9,7 +9,7 @@ namespace GroupProject
     internal class Display
     {
 
-        public void ScreenDisplay()
+        public static void ScreenDisplay()
         {
             Console.Clear();
 
@@ -18,12 +18,12 @@ namespace GroupProject
             MenuDisplay();
         }
 
-        public void StartUp()
+        public static void StartUp()
         {
             Console.WriteLine("Welcome to basic finance App \n Press any Key to continue");
             Console.ReadKey(true);
         }
-        public void MenuDisplay()
+        public static void MenuDisplay()
         {
             Console.Clear();
 
@@ -33,42 +33,88 @@ namespace GroupProject
 
         }
 
-        public void TransactionsDisplay()
-        {
-            Console.WriteLine();
+        public static void TransactionsDisplay(List<Transaction> transactions)
+        { 
+            Console.Clear();
 
-            Console.WriteLine("Please input the amout spent.");
-            string amount = Console.ReadLine();
+            Console.WriteLine("Would you like to view your transaction history? Y/N");
+            string response = Console.ReadLine();
 
-            Console.WriteLine("Please input the date in MM/DD/YYYY format.");
-            string date = Console.ReadLine();
+            if (response == "Y")
+            {
+                ViewTransacitonHistory(transactions);
+            }
 
-            Console.WriteLine("Please input the Transaction type.");
-            string type = Console.ReadLine();
+            Console.WriteLine("Would you like to add a new Transaction?? Y/N");
+            response = Console.ReadLine();
+
+
+            if (response == "Y")
+            {
+                MakeTransacitonDisplay(transactions);
+            }
+
 
         }
 
-        public void BudgetDisplay()
+        public static void MakeTransacitonDisplay(List<Transaction> transactions)
+        {
+
+            Console.WriteLine("Please input the date in MM/DD/YYYY format.");
+            DateTime date = DateTime.Parse(Console.ReadLine());
+
+            Console.WriteLine("Please input the amout spent.");
+            int amount = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("Please input the description of the transaction.");
+            string description = Console.ReadLine();
+
+            Transaction.NewTransaction(date, amount, description, transactions);
+
+        }
+        public static void ViewTransacitonHistory(List<Transaction> transactions)
+        {
+
+            Console.WriteLine("Here are your Transactions: ");
+
+            foreach (var transaction in transactions)
+            {
+                Console.Clear();
+
+                Console.Write("Date: ");
+                Console.Write(transaction._TransactionDate);
+                Console.Write("Total: ");
+                Console.Write(transaction._TransactionTotal);
+                Console.Write("Description: ");
+                Console.Write(transaction._TransactionDescription);
+
+                Console.WriteLine("Press any key to see the next transaction.");
+                Console.ReadKey(true);
+
+            }
+        }
+
+        public static void BudgetDisplay()
         {
             Console.WriteLine("Nothing here! hit enter to return to menu");
             Console.ReadKey(true);
             MenuDisplay();
         }
         
-        public void CategoriesDisplay()
+        public static void CategoriesDisplay()
         {
             Console.WriteLine("Nothing here! hit enter to return to menu");
             Console.ReadKey(true);
             MenuDisplay();
         }
 
-        public void Menu(char letter)
+        public static void Menu(char letter, List<Transaction> transactions)
         {
 
             switch (letter)
             {
                 case 't':
-                    TransactionsDisplay();
+                    TransactionsDisplay(transactions);
                     break;
                 case 'b':
                     BudgetDisplay();
