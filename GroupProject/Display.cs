@@ -54,6 +54,15 @@ namespace GroupProject
             if (response == "Y")
             {
                 MakeTransacitonDisplay(transactions);
+
+                Console.WriteLine("Would you like to view your transaction history? Y/N");
+                response = Console.ReadLine();
+
+                if (response == "Y")
+                {
+                    ViewTransacitonHistory(transactions);
+                }
+
             }
 
             Console.WriteLine("Would you like to go back to the menu? Y/N");
@@ -91,12 +100,12 @@ namespace GroupProject
             {
                 Console.Clear();
 
-                Console.Write("Date: ");
-                Console.Write(transaction._TransactionDate);
+                Console.WriteLine("Date: ");
+                Console.Write(transaction._TransactionDate + " ");
                 Console.Write("Total: ");
-                Console.Write(transaction._TransactionTotal);
+                Console.Write(transaction._TransactionTotal + " ");
                 Console.Write("Description: ");
-                Console.Write(transaction._TransactionDescription);
+                Console.Write(transaction._TransactionDescription + " ");
 
                 Console.WriteLine("Press any key to see the next transaction.");
                 Console.ReadKey(true);
